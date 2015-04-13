@@ -1,111 +1,111 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-     <title>Session Storage Test</title>
+  <meta charset="UTF-8">
+  <title>Session Storage Test</title>
   <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.5.3/numeral.min.js"></script>
- 
-     <script language="JavaScript">
-  $(function(){
-    $("#lblStatus").text( sessionStorageEnabled()?'利用可能':'利用不可');
-   
-    execute(1, 5242879);
-    execute(2, 5242880); // 10 MiB (1024 KiB)
-    execute(3, 5242881);
-   
-    execute(4, 4999999);
-    execute(5, 5000000); // 10 MB (1000 KB)
-    execute(6, 5000001);
-  });
- 
-  function sessionStorageEnabled(){
-    if (typeof sessionStorage === 'undefined') {
-      return false;
-    } else {
-      return true;
-    }
-  }
 
-  function getString(charLength){
-    var buff= '';
-    for (var i = 0 ; i <  charLength ; i++){
-      buff += '0';
+  <script type="text/javascript">
+    $(function () {
+      $("#lblStatus").text(sessionStorageEnabled() ? '利用可能' : '利用不可');
+
+      execute(1, 5242879);
+      execute(2, 5242880); // 10 MiB (1024 KiB)
+      execute(3, 5242881);
+
+      execute(4, 4999999);
+      execute(5, 5000000); // 10 MB (1000 KB)
+      execute(6, 5000001);
+    });
+
+    function sessionStorageEnabled() {
+      if (typeof sessionStorage === 'undefined') {
+        return false;
+      } else {
+        return true;
+      }
     }
-    return buff;
-  }
- 
- 
-  function set2Storage(value)
-  {
-    sessionStorage.clear();
-       try
-    {
-         sessionStorage.setItem('0' , value);
-      return 'OK';
-    }catch(e){
-      return 'NG';
+
+    function getString(charLength) {
+      var buff = '';
+      for (var i = 0 ; i < charLength ; i++) {
+        buff += '0';
+      }
+      return buff;
     }
-   
-  }
- 
-  function execute(index, charLength){
-   
-    var s = getString(charLength);
-    var r = set2Storage(s);
-   
-    $("#lblCharCount_" + index).text(numeral(s.length).format('0,0'));
-    $("#lblByteLength_" + index).text(numeral(s.length * 2).format('0,0'));
-    $("#lblResult_" + index).text(r);
-   
-  }
-</script>
+
+
+    function set2Storage(value) {
+      sessionStorage.clear();
+      try {
+        sessionStorage.setItem('0', value);
+        return 'OK';
+      } catch (e) {
+        return 'NG';
+      }
+
+    }
+
+    function execute(index, charLength) {
+
+      var s = getString(charLength);
+      var r = set2Storage(s);
+
+      $("#lblCharCount_" + index).text(numeral(s.length).format('0,0'));
+      $("#lblByteLength_" + index).text(numeral(s.length * 2).format('0,0'));
+      $("#lblResult_" + index).text(r);
+
+    }
+  </script>
 </head>
 <body>
-<table>
-  <tr>
-    <th>sessionStorageの利用可否：</th>
-    <td><span id="lblStatus"></span></td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <th>sessionStorageの利用可否：</th>
+      <td><span id="lblStatus"></span></td>
+    </tr>
+  </table>
 
-<table border="1" cellpadding="4">
-  <tr>
-    <th>&nbsp;</th>
-    <th>文字数(ASCIIの'0'を1文字として)</th>
-    <th>バイト数(UTF-16)</th>
-    <th>成否</th>
-  </tr>
-  <tr>
-    <th rowspan="3">10MiB（1024 * 1024 Bytes）前後<br</th>
-    <td><span id="lblCharCount_1"></span></td>
-    <td><span id="lblByteLength_1"></span></td>
-    <td><span id="lblResult_1"></span></td>
-  </tr>
-  <tr>
-    <td><span id="lblCharCount_2"></span></td>
-    <td><span id="lblByteLength_2"></span></td>
-    <td><span id="lblResult_2"></span></td>
-  </tr>
-  <tr>
-    <td><span id="lblCharCount_3"></span></td>
-    <td><span id="lblByteLength_3"></span></td>
-    <td><span id="lblResult_3"></span></td>
-  </tr>
-  <tr>
-    <th rowspan="3">10MB（1000 * 1000 Bytes）前後<br</th>
-    <td><span id="lblCharCount_4"></span></td>
-    <td><span id="lblByteLength_4"></span></td>
-    <td><span id="lblResult_4"></span></td>
-  </tr>
-  <tr>
-    <td><span id="lblCharCount_5"></span></td>
-    <td><span id="lblByteLength_5"></span></td>
-    <td><span id="lblResult_5"></span></td>
-  </tr>
-  <tr>
-    <td><span id="lblCharCount_6"></span></td>
-    <td><span id="lblByteLength_6"></span></td>
-    <td><span id="lblResult_6"></span></td>
-  </tr>
-</table>
+  <table border="1" cellpadding="4">
+    <tr>
+      <th>&nbsp;</th>
+      <th>文字数(ASCIIの'0'を1文字として)</th>
+      <th>バイト数(UTF-16)</th>
+      <th>成否</th>
+    </tr>
+    <tr>
+      <th rowspan="3">10MiB（1024 * 1024 Bytes）前後<br></th>
+      <td><span id="lblCharCount_1"></span></td>
+      <td><span id="lblByteLength_1"></span></td>
+      <td><span id="lblResult_1"></span></td>
+    </tr>
+    <tr>
+      <td><span id="lblCharCount_2"></span></td>
+      <td><span id="lblByteLength_2"></span></td>
+      <td><span id="lblResult_2"></span></td>
+    </tr>
+    <tr>
+      <td><span id="lblCharCount_3"></span></td>
+      <td><span id="lblByteLength_3"></span></td>
+      <td><span id="lblResult_3"></span></td>
+    </tr>
+    <tr>
+      <th rowspan="3">10MB（1000 * 1000 Bytes）前後<br></th>
+      <td><span id="lblCharCount_4"></span></td>
+      <td><span id="lblByteLength_4"></span></td>
+      <td><span id="lblResult_4"></span></td>
+    </tr>
+    <tr>
+      <td><span id="lblCharCount_5"></span></td>
+      <td><span id="lblByteLength_5"></span></td>
+      <td><span id="lblResult_5"></span></td>
+    </tr>
+    <tr>
+      <td><span id="lblCharCount_6"></span></td>
+      <td><span id="lblByteLength_6"></span></td>
+      <td><span id="lblResult_6"></span></td>
+    </tr>
+  </table>
 </body>
 </html>
